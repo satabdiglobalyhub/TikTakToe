@@ -1,20 +1,23 @@
 const X_CLASS = "x";
 const CIRCLE_CLASS = "circle";
-const WINNING_COMBINATOINS=[
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-]
+const WINNING_COMBINATOINS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 const cellElements = document.querySelectorAll("[data-cell]");
+const winningMessageTextElement = document.querySelector(
+  "[data-winning-message-text]"
+);
 const board = document.getElementById("board");
 let circleTurn;
 
-startGame()
+startGame();
 
 function startGame() {
   circleTurn = false;
@@ -28,14 +31,21 @@ function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   PlaceMark(cell, currentClass);
-  if (checkWin(currentClass)){
-console.log('winner')
+  if (checkWin(currentClass)) {
+    endGame(false);
   }
   //check for win
   //check for draw
   //switch turns
   swapTurns();
   setBoardHoverClass();
+}
+
+function endGame(draw) {
+  if (draw) {
+  } else {
+    winningMessageTextElement.innerText = circleTurn ? "O Wins!" : "X Wins!";
+  }
 }
 
 function PlaceMark(cell, currentClass) {
@@ -56,10 +66,10 @@ function setBoardHoverClass() {
   }
 }
 
-function checkWin(currentClass){
-return WINNING_COMBINATOINS.some(combination =>{
-    return combination.every(index =>{
-        return cellElements[index].classList.contains(currentClass)
-    })
-})
+function checkWin(currentClass) {
+  return WINNING_COMBINATOINS.some((combination) => {
+    return combination.every((index) => {
+      return cellElements[index].classList.contains(currentClass);
+    });
+  });
 }
