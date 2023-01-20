@@ -11,6 +11,7 @@ const WINNING_COMBINATOINS = [
   [2, 4, 6],
 ];
 const cellElements = document.querySelectorAll("[data-cell]");
+const winningMessageElement = document.getElementById("winningMessage");
 const winningMessageTextElement = document.querySelector(
   "[data-winning-message-text]"
 );
@@ -33,6 +34,11 @@ function handleClick(e) {
   PlaceMark(cell, currentClass);
   if (checkWin(currentClass)) {
     endGame(false);
+  }else if (isDraw()){
+    endGame(true)
+  }else{
+    swapTurns()
+    setBoardHoverClass()
   }
   //check for win
   //check for draw
@@ -43,9 +49,17 @@ function handleClick(e) {
 
 function endGame(draw) {
   if (draw) {
+    winningMessageElement.innerText= "Draw"
   } else {
     winningMessageTextElement.innerText = circleTurn ? "O Wins!" : "X Wins!";
   }
+  winningMessageTextElement.classList.add("show");
+}
+
+function isDraw(){
+    return [...cellElements].every(cell => {
+        return cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS)
+    })
 }
 
 function PlaceMark(cell, currentClass) {
