@@ -34,32 +34,17 @@ function handleClick(e) {
   PlaceMark(cell, currentClass);
   if (checkWin(currentClass)) {
     endGame(false);
-  }else if (isDraw()){
-    endGame(true)
-  }else{
-    swapTurns()
-    setBoardHoverClass()
   }
-  //check for win
-  //check for draw
-  //switch turns
   swapTurns();
   setBoardHoverClass();
 }
 
 function endGame(draw) {
   if (draw) {
-    winningMessageElement.innerText= "Draw"
+    winningMessageElement.innerText = "Draw!";
   } else {
     winningMessageTextElement.innerText = circleTurn ? "O Wins!" : "X Wins!";
   }
-  winningMessageTextElement.classList.add("show");
-}
-
-function isDraw(){
-    return [...cellElements].every(cell => {
-        return cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS)
-    })
 }
 
 function PlaceMark(cell, currentClass) {
