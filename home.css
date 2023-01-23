@@ -110,7 +110,6 @@ body {
 .restart-button {
   font-size: 1rem;
   border: 1px solid black;
-  border-radius: 10%;
   display: flex;
   justify-content: center;
   cursor: pointer;
