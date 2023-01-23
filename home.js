@@ -34,17 +34,28 @@ function handleClick(e) {
   PlaceMark(cell, currentClass);
   if (checkWin(currentClass)) {
     endGame(false);
+  } else if (isDraw()) {
+    endGame(true);
+  } else {
+    swapTurns();
+    setBoardHoverClass();
   }
-  swapTurns();
-  setBoardHoverClass();
 }
 
 function endGame(draw) {
   if (draw) {
-    winningMessageElement.innerText = "Draw!";
+    winningMessageTextElement.innerText = "Draw!";
   } else {
     winningMessageTextElement.innerText = circleTurn ? "O Wins!" : "X Wins!";
   }
+}
+
+function isDraw() {
+  return [...cellElements].every((cell) => {
+    return (
+      cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS)
+    );
+  });
 }
 
 function PlaceMark(cell, currentClass) {
