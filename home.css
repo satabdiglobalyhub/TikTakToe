@@ -102,21 +102,35 @@ body {
 }
 
 .winning-message {
-  padding: 1rem;
-  font-size: 2rem;
+  display: none;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  padding-top: 60%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: white;
+  font-size: 5rem;
 }
 
-.restart-button {
-  font-size: 1rem;
+.winning-message button {
+  font-size: 2rem;
+  background-color: white;
   border: 1px solid black;
-  display: flex;
-  justify-content: center;
+  padding: .25em .5em;
   cursor: pointer;
 }
 
-.restart-button:hover{
-    background-color: black;
-    color:white;
-    border-color: white;
+.winning-message button:hover{
+ background-color: black;
+ color: white;
+ border-color: white;
+}
+
+.winning-message.show{
+  display: flex;
+  
 }

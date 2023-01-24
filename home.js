@@ -48,6 +48,7 @@ function endGame(draw) {
   } else {
     winningMessageTextElement.innerText = circleTurn ? "O Wins!" : "X Wins!";
   }
+  winningMessageElement.classList.add("show");
 }
 
 function isDraw() {
